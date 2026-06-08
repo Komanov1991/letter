@@ -1,0 +1,314 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bsd-items: -1px -1px 3px grey;
+  --bsd: inset -2px -2px 3px grey;
+  --bsd-heart: inset 2px 2px 3px rgb(255, 255, 255);
+}
+
+body {
+  font-family: "Courier New", monospace;
+  letter-spacing: 2px;
+  background-color: rgb(0, 0, 0);
+}
+
+.cal {
+  position: relative;
+}
+
+.cal_img {
+  width: 100%;
+  height: 100vh;
+  scale: 1.1;
+}
+
+.container_img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80vw;
+  rotate: 20deg;
+  display: flex;
+  justify-content: space-between;
+}
+
+.img_left {
+  position: absolute;
+  top: -55px;
+  left: -4.5%;
+  scale: 2;
+  z-index: 1;
+  transition: all 1s ease;
+}
+
+.img_right {
+  position: absolute;
+  top: -25px;
+  right: -10%;
+  scale: 2;
+  transition: all 1s ease;
+}
+
+.left-away {
+  left: -15%;
+}
+
+.right-away {
+  right: -20%;
+}
+
+.left-touch {
+  left: 4.2%;
+}
+
+.right-touch {
+  right: -1.2%;
+}
+
+.heart {
+  position: absolute;
+  bottom: -50px;
+  font-size: 24px;
+  animation: fly 5s linear forwards;
+  z-index: 10;
+}
+
+@keyframes fly {
+  from {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-100vh) scale(0.3);
+    opacity: 0;
+  }
+}
+
+@keyframes heart-item {
+  0% {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+  20% {
+    transform: translate(-20px, -40px);
+  }
+  40% {
+    transform: translate(20px, -80px);
+  }
+  60% {
+    transform: translate(-20px, -120px);
+  }
+  80% {
+    transform: translate(20px, -160px);
+  }
+  100% {
+    transform: translate(0, -200px);
+    opacity: 0;
+  }
+}
+
+.ripple {
+  position: absolute;
+  border: 3px solid rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  animation: ripple 1.8s ease-out forwards;
+  z-index: 9999;
+}
+
+@keyframes ripple {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 1;
+    -webkit-filter: blur(10);
+  }
+
+  100% {
+    width: 300px;
+    height: 300px;
+    opacity: 0;
+    -webkit-filter: blur(0);
+  }
+}
+
+.btn {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.welcom {
+  width: 40px;
+  height: 40px;
+  border: 1 solid grey;
+  box-shadow: var(--bsd-items);
+  background: none;
+  border-radius: 50px;
+  transition: 1s;
+}
+.welcom:active {
+  width: 50px;
+  height: 30px;
+  font-size: 12px;
+}
+
+.flash {
+  position: fixed;
+
+  width: 30px;
+  height: 30px;
+
+  border-radius: 50%;
+
+  background-color: white;
+
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  filter: blur(20px);
+
+  pointer-events: none;
+
+  z-index: 99999;
+
+  animation: flashFullScreen 1.5s forwards;
+}
+
+@keyframes flashFullScreen {
+  0% {
+    width: 30px;
+    height: 30px;
+
+    opacity: 1;
+    filter: blur(20px);
+  }
+
+  30% {
+    width: 300px;
+    height: 300px;
+
+    opacity: 1;
+    filter: blur(50px);
+  }
+
+  100% {
+    width: 4000px;
+    height: 4000px;
+
+    opacity: 0;
+
+    filter: blur(150px);
+  }
+}
+
+.letter {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+
+  width: 500px;
+  height: 300px;
+  max-width: 90%;
+
+  padding: 0;
+  border: none;
+
+  padding: 30px;
+  background: rgb(202, 202, 202);
+  border-radius: 0 0 20px 20px;
+  box-shadow: var(--bsd-items);
+
+  opacity: 0;
+
+  transition: 2s;
+
+  z-index: 1000;
+}
+
+.letter.show {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+}
+
+.paper {
+  position: fixed;
+  top: 0%;
+  left: 50%;
+
+  left: 50%;
+  bottom: 10px;
+
+  transform: translateX(-50%);
+
+  transition: 1.2s ease;
+
+  width: 450px;
+  height: 280px;
+  background-color: white;
+  padding: 12px;
+
+  font-size: 8px;
+  text-align: center;
+}
+
+.paper.show {
+  transform: translateX(-50%) translateY(-120px) rotate(-4deg);
+}
+
+.cover-body {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 510px;
+  height: 310px;
+  clip-path: polygon(0% 0%, 50% 50%, 100% 0%, 100% 100%, 0% 100%);
+
+  border-radius: 16px;
+
+  backdrop-filter: blur(5px);
+
+  z-index: 10;
+}
+
+.cover-top {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 180px;
+
+  background: rgb(202, 202, 202);
+
+  clip-path: polygon(0 0, 50% 100%, 100% 0);
+
+  transform-origin: top center;
+
+  transition: 1.5s ease;
+}
+
+.cover-top.open {
+  transform: rotateX(180deg);
+  z-index: -1;
+}
+
+.message {
+  transition: 1s;
+}
+
+.message p {
+  margin: 20px 0;
+  font-size: 22px;
+}
